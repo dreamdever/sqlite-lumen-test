@@ -12,5 +12,15 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    return app('db')->select("
+		SELECT * FROM movies
+   	");
+});
+
+$app->get('/movie/{id}', function ($id) use ($app) {
+    return app('db')->select("
+		SELECT *
+		FROM movies
+		WHERE id=?
+   	", [$id]);
 });
